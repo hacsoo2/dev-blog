@@ -32,7 +32,8 @@ Nginx는 여러개의 서버블록 설정이 가능하다. 가상의 웹서버�
 
     Nginx 가 어떤 서버 블록으로 request 를 보낼지는 구분할 때, 첫번째로 'listen' directive 을 기반으로 다음과 같은 rule 에 의해 결정한다.
 
-        - 'listen' directive 에 완전하지 못한 부분들을 default values 로 채우며 translate 를 한다.
+        - 'listen' directive 에 완전하지 못한 부분들을 default values 로 
+        채우며 translate 를 한다.
 
     그리고 각각의 블록을 IP 와 port 로 평가 되게 한다. 예를 들자면 다음과 같다.
 
@@ -42,12 +43,14 @@ Nginx는 여러개의 서버블록 설정이 가능하다. 가상의 웹서버�
 
         - port 8888 에 IP address 가 없으면 0.0.0.0:8888 으로 채워진다.
 
-        - 그다음, IP address 와 port 를 기반으로 request와 가장 명확하게 맞는 서버블록 리스트를 모은다.
-        이말은 만약에 명확한 IP address 가 있는 블록이 있다면 IP address 가 0.0.0.0 인 블록은
-        선택 받지 못하게 된다. 어떤 경우라도 port 는 정확하게 매치가 되야한다.
+        - 그다음, IP address 와 port 를 기반으로 request와 가장 명확하게 맞는 
+        서버블록 리스트를 모은다. 이말은 만약에 명확한 IP address 가 있는 블록이 
+        있다면 IP address 가 0.0.0.0 인 블록은 선택 받지 못하게 된다. 
+        어떤 경우라도 port 는 정확하게 매치가 되야한다.
 
-        - 가장 명확하게 매치가 되는 서버 블록이 1개 있다면 그 블록이 request 에 응답한다.
-        만약 비슷한 정확도로 매칭되는 서브블록이 여러개라면 Nginx 는 'server_name' directive 를 평가하게 된다.
+        - 가장 명확하게 매치가 되는 서버 블록이 1개 있다면 그 블록이 
+        request 에 응답한다. 만약 비슷한 정확도로 매칭되는 서브블록이 여러개라면 
+        Nginx 는 'server_name' directive 를 평가하게 된다.
 
     'listen' directive 에 같은 정확도의 서버 블록이 여러개가 있다면, Nginx 는 블록의 'server_name' 을 찾아보게 된다.
     예를 들어 example.com 가 port 80 에 192.168.1.10 로 호스트 되면, example.com 의 request 는 항상 첫번째 블록에서 serve 된다.
@@ -65,15 +68,17 @@ Nginx는 여러개의 서버블록 설정이 가능하다. 가상의 웹서버�
 
     이제 Nginx 는 가장 정확한 매칭을 찾기 위해 'server_name' directive 를 아래와 같은 rule 으로 보게된다.
 
-        - 첫번째로 'server_name' directive 의 값이 request 의'Host' header 와 정확하게 맞는지 확인한다.
-        여러 블록이 매칭된다면 첫번째 블록을 사용한다.
+        - 첫번째로 'server_name' directive 의 값이 request 의
+        'Host' header 와 정확하게 맞는지 확인한다. 여러 블록이 매칭된다면 
+        첫번째 블록을 사용한다.
 
         - 매치 되는 블록을 찾을 수 없으면, 'leading wildcard'
         (indicated by a * at the beginning of the name in the config)
-        를 사용하는데 1개의 블록을 찾게되면 그 블록을 사용하고 여러 블록을 찾게 되면 그 중에 가장 길게 매칭되는
-        블록을 사용한다.
+        를 사용하는데 1개의 블록을 찾게되면 그 블록을 사용하고 여러 블록을 찾게 되면 
+        그 중에 가장 길게 매칭되는 블록을 사용한다.
 
-        - 다음은 regular expression(indicated by a * at the beginning of the name in the config)
+        - 다음은 regular expression(indicated by a * at the 
+        beginning of the name in the config)
         을 이용해서 'Host' header 와 매치되는 첫번째 블록을 사용한다.
 
         - 그래도 매치되는게 없으면, default 서버 블록을 선택한다.
@@ -99,9 +104,10 @@ Location blocks 는 일반적으로 아래와 같은 형태로 되어있다.
 modifier 가 있고 없음에 따라 Nginx 가 location block 을 매칭시켜주는게 달라진다. 아래 modifiers 는 
 location block 이 어떻게 해석되어지는지를 보여준다.
 
-    - modifier 가 없으면 location 은 prefix 로 해석되어 매칭된다. 그 말은 주어진 location 은
-    request URI 의 앞에서부터 매칭 분석이 진행된다.
+    - modifier 가 없으면 location 은 prefix 로 해석되어 매칭된다. 
+    그 말은 주어진 location 은 request URI 의 앞에서부터 매칭 분석이 진행된다.
     
-    - '=' 을 사용하면 request URI 가 주어진 location 과 정확히 매치가 되어야 된다.
+    - '=' 을 사용하면 request URI 가 주어진 location 과 
+    정확히 매치가 되어야 된다.
 
     - '~' 이 사용되면

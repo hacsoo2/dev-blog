@@ -25,12 +25,16 @@ const Bio = () => {
         siteMetadata {
           author
           description
+          social {
+            github
+          }
+          email
         }
       }
     }
   `)
 
-  const { author, description } = data.site.siteMetadata
+  const { author, description, social, email } = data.site.siteMetadata
   return (
     <div
       style={{
@@ -52,8 +56,12 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author}</strong> {description}
+        Written by <strong>{author}</strong> who {description}
         {` `}
+        <a> Email: {email} </a>  
+        <a href={`https://github.com/${social.github}`}>
+         | Github
+        </a>
       </p>
     </div>
   )

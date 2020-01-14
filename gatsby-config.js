@@ -2,12 +2,13 @@ module.exports = {
   siteMetadata: {
     title: `Hacsoo's Blog`,
     author: `Hacsoo Lee`,
-    description: `Trying to learn something to be a better person in the next day.`,
+    description: `likes reading and learning to understand the world.`,
     siteUrl: `https://hacsoo2-dev-blog.netlify.com`,
     social: {
-      twitter: `hacsoo2`,
+      github: `hacsoo2`,
     },
-  },
+    email: `taekseung2@gmail.com`,
+    },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
